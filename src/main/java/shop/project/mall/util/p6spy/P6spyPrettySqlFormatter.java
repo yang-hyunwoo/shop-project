@@ -1,4 +1,4 @@
-package shop.project.util.p6spy;
+package shop.project.mall.util.p6spy;
 
 import com.p6spy.engine.logging.Category;
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
