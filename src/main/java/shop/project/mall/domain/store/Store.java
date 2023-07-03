@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import shop.project.mall.domain.common.AttachFile;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 public class Store {
@@ -32,6 +34,16 @@ public class Store {
 
     private boolean deleted;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Store that)) return false;
+        return id != null && id.equals(that.getId());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
 

@@ -6,10 +6,12 @@ import shop.project.mall.domain.common.AttachFile;
 import shop.project.mall.domain.constant.Gender;
 import shop.project.mall.domain.constant.UserRole;
 import shop.project.mall.domain.point.PointHist;
+import shop.project.mall.domain.store.Store;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -27,10 +29,11 @@ public class User {
     @Column(name="userId")
     private Long id;
 
-    //프로필 id
     @OneToOne(fetch = FetchType.LAZY)
     private AttachFile attachFile;
-    //쇼핑몰 id
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private Store store;
 
     @Column(nullable = false , length = 50)
     private String email;
@@ -73,8 +76,17 @@ public class User {
     private LocalDateTime deleteDay;
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User that)) return false;
+        return id != null && id.equals(that.getId());
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
 
 

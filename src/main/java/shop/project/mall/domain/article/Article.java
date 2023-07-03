@@ -5,6 +5,8 @@ import lombok.Getter;
 import shop.project.mall.domain.constant.ArticleType;
 import shop.project.mall.domain.user.User;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 public class Article {
@@ -33,4 +35,16 @@ public class Article {
 
     private boolean rprtStts;
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Article that)) return false;
+        return id != null && id.equals(that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

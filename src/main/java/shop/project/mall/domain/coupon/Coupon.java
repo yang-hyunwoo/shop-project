@@ -6,6 +6,8 @@ import lombok.Getter;
 import shop.project.mall.domain.constant.CouponType;
 import shop.project.mall.domain.prdc.PrdcCode;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 public class Coupon {
@@ -32,4 +34,16 @@ public class Coupon {
     private Integer couponMoney;
 
     private boolean deleted;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Coupon that)) return false;
+        return id != null && id.equals(that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

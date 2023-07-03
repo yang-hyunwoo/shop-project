@@ -3,6 +3,8 @@ package shop.project.mall.domain.prdc;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 public class PrdcCode {
@@ -19,5 +21,15 @@ public class PrdcCode {
 
     private boolean deleted;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PrdcCode that)) return false;
+        return id != null && id.equals(that.getId());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

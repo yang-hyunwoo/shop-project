@@ -2,10 +2,13 @@ package shop.project.mall.domain.user;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import shop.project.mall.domain.common.AttachFile;
 import shop.project.mall.domain.constant.Gender;
 import shop.project.mall.domain.constant.UserRole;
+import shop.project.mall.domain.store.Store;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -15,9 +18,11 @@ public class UserHist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //프로필 id
+    @OneToOne(fetch = FetchType.LAZY)
+    private AttachFile attachFile;
 
-    //쇼핑몰 id
+    @OneToOne(fetch = FetchType.LAZY)
+    private Store store;
 
     @Column(nullable = false , length = 50)
     private String email;
@@ -55,9 +60,19 @@ public class UserHist {
     private LocalDateTime dromantDay;
 
     private LocalDateTime deleteDay;
-    
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserHist that)) return false;
+        return id != null && id.equals(that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
 
 
