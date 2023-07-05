@@ -1,13 +1,16 @@
 package shop.project.mall.domain.prdc;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import shop.project.mall.domain.user.User;
 
 import java.util.Objects;
 
-@Entity
+@NoArgsConstructor
 @Getter
+@Entity
 public class PrdtReview {
 
     @Id
@@ -32,6 +35,20 @@ public class PrdtReview {
     private double reviewScore;
 
     private boolean deleted;
+    @Builder
+    public PrdtReview(PrdtPurList prdtPurList,
+                      User user,
+                      String prdtReviewTitle,
+                      String prdtReviewContent,
+                      double reviewScore,
+                      boolean deleted) {
+        this.prdtPurList = prdtPurList;
+        this.user = user;
+        this.prdtReviewTitle = prdtReviewTitle;
+        this.prdtReviewContent = prdtReviewContent;
+        this.reviewScore = reviewScore;
+        this.deleted = deleted;
+    }
 
     @Override
     public boolean equals(Object o) {

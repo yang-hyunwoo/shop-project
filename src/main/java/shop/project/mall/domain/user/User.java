@@ -1,7 +1,9 @@
 package shop.project.mall.domain.user;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import shop.project.mall.domain.common.AttachFile;
 import shop.project.mall.domain.constant.Gender;
 import shop.project.mall.domain.constant.UserRole;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
+@NoArgsConstructor
 @Getter
 @Table(name = "Users",
         indexes = {
@@ -22,6 +24,7 @@ import java.util.Objects;
         @Index(columnList = "email"),
 
 })
+@Entity
 public class User {
 
     @Id
@@ -75,6 +78,44 @@ public class User {
 
     private LocalDateTime deleteDay;
 
+    @Builder
+    public User(AttachFile attachFile,
+                Store store,
+                String email,
+                String nickname,
+                String username,
+                String password,
+                String phoneNumber,
+                int point,
+                List<PointHist> pointHist,
+                Gender gender,
+                String loginType,
+                boolean emailAuth,
+                UserRole auth,
+                boolean authChk,
+                LocalDateTime pwChgDate,
+                boolean useYn,
+                LocalDateTime dromantDay,
+                LocalDateTime deleteDay) {
+        this.attachFile = attachFile;
+        this.store = store;
+        this.email = email;
+        this.nickname = nickname;
+        this.username = username;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.point = point;
+        this.pointHist = pointHist;
+        this.gender = gender;
+        this.loginType = loginType;
+        this.emailAuth = emailAuth;
+        this.auth = auth;
+        this.authChk = authChk;
+        this.pwChgDate = pwChgDate;
+        this.useYn = useYn;
+        this.dromantDay = dromantDay;
+        this.deleteDay = deleteDay;
+    }
 
     @Override
     public boolean equals(Object o) {

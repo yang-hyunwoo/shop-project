@@ -1,13 +1,16 @@
 package shop.project.mall.domain.chat;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import shop.project.mall.domain.constant.ChatRoomType;
 
 import java.util.Objects;
 
-@Entity
+@NoArgsConstructor
 @Getter
+@Entity
 public class ChatRoom {
 
     @Id
@@ -30,6 +33,23 @@ public class ChatRoom {
     private int roomMaxCount;
 
     private boolean deleted;
+
+    @Builder
+    public ChatRoom(String roomName,
+                    boolean publicRoom,
+                    ChatRoomType chatWay,
+                    String roomPassword,
+                    int roomPersonIngCount,
+                    int roomMaxCount,
+                    boolean deleted) {
+        this.roomName = roomName;
+        this.publicRoom = publicRoom;
+        this.chatWay = chatWay;
+        this.roomPassword = roomPassword;
+        this.roomPersonIngCount = roomPersonIngCount;
+        this.roomMaxCount = roomMaxCount;
+        this.deleted = deleted;
+    }
 
     @Override
     public boolean equals(Object o) {

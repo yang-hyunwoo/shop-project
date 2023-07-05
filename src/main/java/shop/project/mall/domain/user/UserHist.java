@@ -1,7 +1,9 @@
 package shop.project.mall.domain.user;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import shop.project.mall.domain.common.AttachFile;
 import shop.project.mall.domain.constant.Gender;
 import shop.project.mall.domain.constant.UserRole;
@@ -10,8 +12,9 @@ import shop.project.mall.domain.store.Store;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity
+@NoArgsConstructor
 @Getter
+@Entity
 public class UserHist {
 
     @Id
@@ -61,6 +64,42 @@ public class UserHist {
 
     private LocalDateTime deleteDay;
 
+    @Builder
+    public UserHist(AttachFile attachFile,
+                    Store store,
+                    String email,
+                    String nickname,
+                    String userName,
+                    String password,
+                    String phoneNumber,
+                    int point,
+                    Gender gender,
+                    String loginType,
+                    boolean emailAuth,
+                    UserRole auth,
+                    boolean authChk,
+                    LocalDateTime pwChgDate,
+                    boolean useYn,
+                    LocalDateTime dromantDay,
+                    LocalDateTime deleteDay) {
+        this.attachFile = attachFile;
+        this.store = store;
+        this.email = email;
+        this.nickname = nickname;
+        this.userName = userName;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.point = point;
+        this.gender = gender;
+        this.loginType = loginType;
+        this.emailAuth = emailAuth;
+        this.auth = auth;
+        this.authChk = authChk;
+        this.pwChgDate = pwChgDate;
+        this.useYn = useYn;
+        this.dromantDay = dromantDay;
+        this.deleteDay = deleteDay;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,13 +1,16 @@
 package shop.project.mall.domain.article;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import shop.project.mall.domain.user.User;
 
 import java.util.Objects;
 
-@Entity
+@NoArgsConstructor
 @Getter
+@Entity
 public class ArticleRprt {
 
     @Id
@@ -24,6 +27,15 @@ public class ArticleRprt {
     private User user;
 
     private boolean deleted;
+
+    @Builder
+    public ArticleRprt(Article article,
+                       User user,
+                       boolean deleted) {
+        this.article = article;
+        this.user = user;
+        this.deleted = deleted;
+    }
 
     @Override
     public boolean equals(Object o) {

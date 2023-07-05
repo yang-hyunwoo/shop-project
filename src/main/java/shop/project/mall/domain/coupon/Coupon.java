@@ -2,14 +2,17 @@ package shop.project.mall.domain.coupon;
 
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import shop.project.mall.domain.constant.CouponType;
 import shop.project.mall.domain.prdc.PrdcCode;
 
 import java.util.Objects;
 
-@Entity
+@NoArgsConstructor
 @Getter
+@Entity
 public class Coupon {
 
     @Id
@@ -34,6 +37,22 @@ public class Coupon {
     private Integer couponMoney;
 
     private boolean deleted;
+    @Builder
+    public Coupon(String prodCodeId,
+                  PrdcCode prdcCode,
+                  String couponName,
+                  CouponType couponType,
+                  Integer couponPercent,
+                  Integer couponMoney,
+                  boolean deleted) {
+        this.prodCodeId = prodCodeId;
+        this.prdcCode = prdcCode;
+        this.couponName = couponName;
+        this.couponType = couponType;
+        this.couponPercent = couponPercent;
+        this.couponMoney = couponMoney;
+        this.deleted = deleted;
+    }
 
     @Override
     public boolean equals(Object o) {

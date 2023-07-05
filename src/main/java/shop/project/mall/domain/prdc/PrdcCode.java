@@ -1,12 +1,15 @@
 package shop.project.mall.domain.prdc;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
-@Entity
+@NoArgsConstructor
 @Getter
+@Entity
 public class PrdcCode {
 
     @Id
@@ -20,6 +23,14 @@ public class PrdcCode {
     private Long prdcCode;
 
     private boolean deleted;
+    @Builder
+    public PrdcCode(String prdcName,
+                    Long prdcCode,
+                    boolean deleted) {
+        this.prdcName = prdcName;
+        this.prdcCode = prdcCode;
+        this.deleted = deleted;
+    }
 
     @Override
     public boolean equals(Object o) {

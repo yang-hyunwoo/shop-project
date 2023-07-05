@@ -1,13 +1,15 @@
 package shop.project.mall.domain.store;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import shop.project.mall.domain.common.AttachFile;
 
 import java.util.Objects;
-
-@Entity
+@NoArgsConstructor
 @Getter
+@Entity
 public class Store {
 
     @Id
@@ -33,6 +35,22 @@ public class Store {
     private String detail;
 
     private boolean deleted;
+    @Builder
+    public Store(String storeName,
+                 AttachFile storeFileId,
+                 String comment,
+                 String addr,
+                 String tel,
+                 String detail,
+                 boolean deleted) {
+        this.storeName = storeName;
+        this.storeFileId = storeFileId;
+        this.comment = comment;
+        this.addr = addr;
+        this.tel = tel;
+        this.detail = detail;
+        this.deleted = deleted;
+    }
 
     @Override
     public boolean equals(Object o) {

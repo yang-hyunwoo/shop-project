@@ -2,13 +2,16 @@ package shop.project.mall.domain.coupon;
 
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import shop.project.mall.domain.user.User;
 
 import java.util.Objects;
 
-@Entity
+@NoArgsConstructor
 @Getter
+@Entity
 public class CouponRegHist {
 
     @Id
@@ -25,6 +28,15 @@ public class CouponRegHist {
     private User user;
 
     private boolean useYn;
+
+    @Builder
+    public CouponRegHist(Coupon coupon,
+                         User user,
+                         boolean useYn) {
+        this.coupon = coupon;
+        this.user = user;
+        this.useYn = useYn;
+    }
 
     @Override
     public boolean equals(Object o) {

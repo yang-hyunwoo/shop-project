@@ -1,17 +1,21 @@
 package shop.project.mall.domain.common;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
 
-@Entity
+@NoArgsConstructor
 @Getter
+@IdClass(AttachFileId.class)
 @Table(indexes = {
         @Index(columnList = "attachFileChildId")
 })
-@IdClass(AttachFileId.class)
+@Entity
+
 public class AttachFile {
 
     @Id
@@ -39,6 +43,23 @@ public class AttachFile {
     private String thumbFilePath;
 
     private boolean deleted;
+
+    @Builder
+    public AttachFile(int attachFileChildId,
+                      String fileName,
+                      String filePath,
+                      Long fileSize,
+                      String originFileName,
+                      String thumbFilePath,
+                      boolean deleted) {
+        this.attachFileChildId = attachFileChildId;
+        this.fileName = fileName;
+        this.filePath = filePath;
+        this.fileSize = fileSize;
+        this.originFileName = originFileName;
+        this.thumbFilePath = thumbFilePath;
+        this.deleted = deleted;
+    }
 
     @Override
     public boolean equals(Object o) {

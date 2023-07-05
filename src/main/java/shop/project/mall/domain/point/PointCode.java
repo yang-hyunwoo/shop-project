@@ -1,12 +1,15 @@
 package shop.project.mall.domain.point;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
-@Entity
+@NoArgsConstructor
 @Getter
+@Entity
 public class PointCode {
 
     @Id
@@ -19,6 +22,13 @@ public class PointCode {
 
     @Column(nullable = false)
     private String pointCodeName;
+
+    @Builder
+    public PointCode(String pointCode,
+                     String pointCodeName) {
+        this.pointCode = pointCode;
+        this.pointCodeName = pointCodeName;
+    }
 
     @Override
     public boolean equals(Object o) {

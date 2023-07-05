@@ -1,12 +1,15 @@
 package shop.project.mall.domain.prdc;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
-@Entity
+@NoArgsConstructor
 @Getter
+@Entity
 public class Delivery {
 
     @Id
@@ -22,6 +25,15 @@ public class Delivery {
 
     @Column(length = 10)
     private String deliveryStatus;
+
+    @Builder
+    public Delivery(String deliveryUid,
+                    String deliveryStore,
+                    String deliveryStatus) {
+        this.deliveryUid = deliveryUid;
+        this.deliveryStore = deliveryStore;
+        this.deliveryStatus = deliveryStatus;
+    }
 
     @Override
     public boolean equals(Object o) {

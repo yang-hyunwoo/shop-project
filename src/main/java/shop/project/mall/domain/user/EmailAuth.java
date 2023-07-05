@@ -1,12 +1,16 @@
 package shop.project.mall.domain.user;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity
+@NoArgsConstructor
 @Getter
+@Entity
 public class EmailAuth {
 
     private static final Long MAX_EXPIRE_TIME = 5L;
@@ -23,6 +27,17 @@ public class EmailAuth {
     private Boolean expired;
 
     private LocalDateTime expireDate;
+
+    @Builder
+    public EmailAuth(String email,
+                     String authToken,
+                     Boolean expired,
+                     LocalDateTime expireDate) {
+        this.email = email;
+        this.authToken = authToken;
+        this.expired = expired;
+        this.expireDate = expireDate;
+    }
 
     @Override
     public boolean equals(Object o) {

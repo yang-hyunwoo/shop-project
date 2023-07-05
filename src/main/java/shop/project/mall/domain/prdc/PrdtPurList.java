@@ -1,14 +1,17 @@
 package shop.project.mall.domain.prdc;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import shop.project.mall.domain.coupon.CouponRegHist;
 import shop.project.mall.domain.user.User;
 
 import java.util.Objects;
 
-@Entity
+@NoArgsConstructor
 @Getter
+@Entity
 public class PrdtPurList {
 
     @Id
@@ -69,6 +72,46 @@ public class PrdtPurList {
     private String deliveryName;
 
     private boolean deleted;
+    @Builder
+    public PrdtPurList(PrdtList prdtList,
+                       User user,
+                       CouponRegHist couponRegHist,
+                       String impUid,
+                       String merchantUid,
+                       String payName,
+                       String payEmail,
+                       String failReason,
+                       String refundReason,
+                       int realPaid,
+                       int salePercent,
+                       int salePaid,
+                       int prdtCnt,
+                       int point,
+                       String deliveryAddr,
+                       String deliveryTel,
+                       String deliveryMsg,
+                       String deliveryName,
+                       boolean deleted) {
+        this.prdtList = prdtList;
+        this.user = user;
+        this.couponRegHist = couponRegHist;
+        this.impUid = impUid;
+        this.merchantUid = merchantUid;
+        this.payName = payName;
+        this.payEmail = payEmail;
+        this.failReason = failReason;
+        this.refundReason = refundReason;
+        this.realPaid = realPaid;
+        this.salePercent = salePercent;
+        this.salePaid = salePaid;
+        this.prdtCnt = prdtCnt;
+        this.point = point;
+        this.deliveryAddr = deliveryAddr;
+        this.deliveryTel = deliveryTel;
+        this.deliveryMsg = deliveryMsg;
+        this.deliveryName = deliveryName;
+        this.deleted = deleted;
+    }
 
     @Override
     public boolean equals(Object o) {

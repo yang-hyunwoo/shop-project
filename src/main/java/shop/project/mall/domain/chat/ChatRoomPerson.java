@@ -1,13 +1,16 @@
 package shop.project.mall.domain.chat;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import shop.project.mall.domain.user.User;
 
 import java.util.Objects;
 
-@Entity
+@NoArgsConstructor
 @Getter
+@Entity
 public class ChatRoomPerson {
 
     @Id
@@ -22,6 +25,13 @@ public class ChatRoomPerson {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "userId")
     private User user;
+
+    @Builder
+    public ChatRoomPerson(ChatRoom chatRoom,
+                          User user) {
+        this.chatRoom = chatRoom;
+        this.user = user;
+    }
 
     @Override
     public boolean equals(Object o) {
