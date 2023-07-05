@@ -10,7 +10,7 @@
 사용 프로그램
 ```
 draw.io
-flutter (예정  변경 가능성)
+flutter (예정  변경 가능성) -> vue로 웹만 먼저 작업 예정
 dbeaver
 spring-boot 3.1
 java 17
@@ -32,4 +32,7 @@ lombok : 1.18.26
 h2 : 2.1.214
 postgresql : 42.6.0
 java-jwt : 4.2.1
+querydsl : 5.0.0
+swagger-openapi : 2.0.4
+p6spy : 1.9.0
 ```
