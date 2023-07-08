@@ -17,7 +17,6 @@ public class P6spyPrettySqlFormatter implements MessageFormattingStrategy {
 
         SimpleDateFormat format1 = new SimpleDateFormat("yy.MM.dd HH:mm:ss");
 
-        //return now + "|" + elapsed + "ms|" + category + "|connection " + connectionId + "|" + P6Util.singleLine(prepared) + sql;
         return format1.format(currentDate) + " | "+ "OperationTime : "+ elapsed + "ms" + sql;
     }
 

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import shop.project.mall.domain.common.AttachFile;
 import shop.project.mall.domain.constant.Gender;
 import shop.project.mall.domain.constant.UserRole;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @Getter
 @Table(name = "Users",
@@ -61,7 +64,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    private String loginType;
+    private String provider;
+
+    private String providerId;
 
     private boolean emailAuth;
 
@@ -78,8 +83,16 @@ public class User {
 
     private LocalDateTime deleteDay;
 
+    @LastModifiedDate
+    @Column(nullable = false)
+    private LocalDateTime lastAccessDate;
+
+    private int lgnFlrCnt;
+
+
     @Builder
-    public User(AttachFile attachFile,
+    public User(Long id,
+                AttachFile attachFile,
                 Store store,
                 String email,
                 String nickname,
@@ -89,14 +102,18 @@ public class User {
                 int point,
                 List<PointHist> pointHist,
                 Gender gender,
-                String loginType,
+                String provider,
+                String providerId,
                 boolean emailAuth,
                 UserRole auth,
                 boolean authChk,
                 LocalDateTime pwChgDate,
                 boolean useYn,
                 LocalDateTime dromantDay,
-                LocalDateTime deleteDay) {
+                LocalDateTime deleteDay,
+                LocalDateTime lastAccessDate,
+                int lgnFlrCnt) {
+        this.id = id;
         this.attachFile = attachFile;
         this.store = store;
         this.email = email;
@@ -107,7 +124,8 @@ public class User {
         this.point = point;
         this.pointHist = pointHist;
         this.gender = gender;
-        this.loginType = loginType;
+        this.provider = provider;
+        this.providerId = providerId;
         this.emailAuth = emailAuth;
         this.auth = auth;
         this.authChk = authChk;
@@ -115,6 +133,8 @@ public class User {
         this.useYn = useYn;
         this.dromantDay = dromantDay;
         this.deleteDay = deleteDay;
+        this.lastAccessDate = lastAccessDate;
+        this.lgnFlrCnt = lgnFlrCnt;
     }
 
     @Override
@@ -129,7 +149,14 @@ public class User {
         return Objects.hash(id);
     }
 
+    public void lgnFlrCntInit() {
+        this.lgnFlrCnt = 0;
+    }
+    public void lgnFlrCntPlus() {
+        this.lgnFlrCnt+= 1;
+    }
 
-
-
+    public void usedChange() {
+        this.useYn = !this.useYn;
+    }
 }
