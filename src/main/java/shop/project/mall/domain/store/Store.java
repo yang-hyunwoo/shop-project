@@ -5,12 +5,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import shop.project.mall.domain.common.AttachFile;
+import shop.project.mall.domain.common.AuditingFields;
 
 import java.util.Objects;
 @NoArgsConstructor
 @Getter
+@Table(indexes = {
+        @Index(columnList = "storeName"),
+})
 @Entity
-public class Store {
+public class Store extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
