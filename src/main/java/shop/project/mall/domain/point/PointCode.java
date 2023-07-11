@@ -4,13 +4,17 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import shop.project.mall.domain.common.AuditingFields;
 
 import java.util.Objects;
 
 @NoArgsConstructor
 @Getter
+@Table(indexes = {
+        @Index(columnList = "pointCodeName"),
+})
 @Entity
-public class PointCode {
+public class PointCode extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,14 +4,18 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import shop.project.mall.domain.common.AuditingFields;
 import shop.project.mall.domain.constant.ChatRoomType;
 
 import java.util.Objects;
 
 @NoArgsConstructor
 @Getter
+@Table(indexes = {
+        @Index(columnList = "roomName"),
+})
 @Entity
-public class ChatRoom {
+public class ChatRoom extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

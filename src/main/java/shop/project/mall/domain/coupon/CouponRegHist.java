@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import shop.project.mall.domain.common.AuditingFields;
 import shop.project.mall.domain.user.User;
 
 import java.util.Objects;
@@ -12,7 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Entity
-public class CouponRegHist {
+public class CouponRegHist extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

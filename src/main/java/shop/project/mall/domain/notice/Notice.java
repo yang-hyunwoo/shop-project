@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import shop.project.mall.domain.common.AuditingFields;
 import shop.project.mall.domain.constant.NoticeType;
 import shop.project.mall.domain.user.User;
 
@@ -11,8 +12,11 @@ import java.util.Objects;
 
 @NoArgsConstructor
 @Getter
+@Table(indexes = {
+        @Index(columnList = "title"),
+})
 @Entity
-public class Notice {
+public class Notice extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import shop.project.mall.domain.common.AttachFile;
+import shop.project.mall.domain.common.AuditingFields;
 import shop.project.mall.domain.constant.Gender;
 import shop.project.mall.domain.constant.UserRole;
 import shop.project.mall.domain.point.PointHist;
@@ -25,10 +26,9 @@ import java.util.Objects;
         @Index(columnList = "nickname"),
         @Index(columnList = "username"),
         @Index(columnList = "email"),
-
 })
 @Entity
-public class User {
+public class User extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

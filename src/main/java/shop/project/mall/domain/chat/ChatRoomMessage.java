@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import shop.project.mall.domain.common.AuditingFields;
 import shop.project.mall.domain.user.User;
 
 import java.util.Objects;
@@ -11,7 +12,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Entity
-public class ChatRoomMessage {
+public class ChatRoomMessage extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

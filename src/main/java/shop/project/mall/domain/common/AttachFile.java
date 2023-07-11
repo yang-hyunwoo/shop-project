@@ -16,7 +16,7 @@ import java.util.Objects;
 })
 @Entity
 
-public class AttachFile {
+public class AttachFile extends AuditingFields{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

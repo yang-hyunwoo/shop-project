@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import shop.project.mall.domain.common.AuditingFields;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -11,7 +12,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Entity
-public class EmailAuth {
+public class EmailAuth extends AuditingFields {
 
     private static final Long MAX_EXPIRE_TIME = 5L;
 

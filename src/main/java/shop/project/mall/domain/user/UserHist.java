@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import shop.project.mall.domain.common.AttachFile;
+import shop.project.mall.domain.common.AuditingFields;
 import shop.project.mall.domain.constant.Gender;
 import shop.project.mall.domain.constant.UserRole;
 import shop.project.mall.domain.store.Store;
@@ -14,8 +15,13 @@ import java.util.Objects;
 
 @NoArgsConstructor
 @Getter
+@Table(indexes = {
+                @Index(columnList = "nickname"),
+                @Index(columnList = "username"),
+                @Index(columnList = "email"),
+        })
 @Entity
-public class UserHist {
+public class UserHist extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

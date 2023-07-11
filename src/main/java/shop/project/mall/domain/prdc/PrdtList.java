@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import shop.project.mall.domain.common.AuditingFields;
 import shop.project.mall.domain.store.Store;
 
 import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Entity
-public class PrdtList {
+public class PrdtList extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
