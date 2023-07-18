@@ -13,8 +13,8 @@ import shop.project.mall.util.encoder.Aes256Util;
 
 import java.io.IOException;
 
-import static shop.project.mall.config.jwt.JwtProcess.CreateCookie;
-import static shop.project.mall.config.jwt.JwtProcess.CreateCookieJwt;
+import static shop.project.mall.config.jwt.JwtProcess.createCookie;
+import static shop.project.mall.config.jwt.JwtProcess.createCookieJwt;
 
 
 @Component
@@ -32,9 +32,9 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         Aes256Util aes256 = new Aes256Util();
         String encrypt = aes256.encrypt(AesProperty.getAesBody(), "true");
 
-        response.addHeader("Set-cookie", CreateCookieJwt(accessToken, "PA_T").toString());
-        response.addHeader("Set-cookie", CreateCookieJwt(refreshToken, "PR_T").toString());
-        response.addHeader("Set-cookie", CreateCookie(encrypt, "PA_AUT").toString());
+        response.addHeader("Set-cookie", createCookieJwt(accessToken, "PA_T").toString());
+        response.addHeader("Set-cookie", createCookieJwt(refreshToken, "PR_T").toString());
+        response.addHeader("Set-cookie", createCookie(encrypt, "PA_AUT").toString());
 
         clearAuthenticationAttributes(request, response);
         getRedirectStrategy().sendRedirect(request, response, targetUrl);

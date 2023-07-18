@@ -31,7 +31,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
-import static shop.project.mall.config.jwt.JwtProcess.CreateCookieJwt;
+import static shop.project.mall.config.jwt.JwtProcess.createCookieJwt;
 
 @Slf4j
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
@@ -128,7 +128,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         if(localCookie) {
             response.addHeader(JwtProperty.getHeader(), token); //header
         } else {
-            response.addHeader("Set-cookie", CreateCookieJwt(accessToken, "PA_T").toString());
+            response.addHeader("Set-cookie", createCookieJwt(accessToken, "PA_T").toString());
         }
         setAuthentication(JwtProcess.verify(token));
     }
@@ -139,7 +139,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         if(localCookie) {
             response.addHeader("REFRESH_TOKEN", newRefreshToken); //header
         } else {
-            response.addHeader("Set-cookie", CreateCookieJwt(newRefreshToken, "PR_T").toString());
+            response.addHeader("Set-cookie", createCookieJwt(newRefreshToken, "PR_T").toString());
         }
     }
 

@@ -11,8 +11,8 @@ public class passwordConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-//        return bcryptPasswordEncoder();
-        return pbkdf2PasswordEncoder();
+        return bcryptPasswordEncoder();
+//        return pbkdf2PasswordEncoder();
     }
 
     public BCryptPasswordEncoder bcryptPasswordEncoder() {
