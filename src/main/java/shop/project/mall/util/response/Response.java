@@ -14,7 +14,7 @@ public class Response<T> {
 
     private  T data;
 
-    public static Response<String> error(String resultCode, int httpCode, String data) {
+    public static <T> Response<T> error(String resultCode, int httpCode, T data) {
         return new Response<>(resultCode, httpCode, data);
     }
 

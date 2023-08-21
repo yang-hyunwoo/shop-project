@@ -2,6 +2,7 @@ package shop.project.mall.config.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.Cookie;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +41,11 @@ public class JwtAuthorizationFilterTest extends DummyObject {
 
     @BeforeEach
     public void setUp() {
+        userRepository.deleteAll();
         userRepository.save(newUser("gus5162@naver.com","현우",UserRole.ADMIN));
         userRepository.save(newUser("gus5163@naver.com","현우",UserRole.USER));
     }
+
 
     @Test
     public void 권한_성공_테스트() throws Exception {

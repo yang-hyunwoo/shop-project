@@ -12,9 +12,12 @@ public class JoinUserResDto {
 
     private String nickname;
 
+    private String email;
+
     public JoinUserResDto(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
         this.nickname = user.getNickname();
+        this.email = user.getEmail();
     }
 }

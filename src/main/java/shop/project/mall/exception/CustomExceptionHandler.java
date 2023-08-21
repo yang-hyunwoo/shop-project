@@ -2,6 +2,7 @@ package shop.project.mall.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import shop.project.mall.util.response.Response;
@@ -11,18 +12,17 @@ import shop.project.mall.util.response.Response;
 public class CustomExceptionHandler {
 
     @ExceptionHandler(CustomApiException.class)
-    public Response<?> apiException(CustomApiException e) {
+    public ResponseEntity<?> apiException(CustomApiException e) {
         log.error(e.getMessage());
-        return Response.error("ERROR", HttpStatus.BAD_REQUEST.value(), e.getMessage() );
+        return new ResponseEntity<>(Response.error("ERROR", HttpStatus.BAD_REQUEST.value(), e.getMessage()),HttpStatus.BAD_REQUEST);
 
     }
 
-//    @ExceptionHandler(CustomValidationException.class)
-//    public ResponseEntity<?> validationApiException(CustomValidationException e) {
-//        log.error(e.getMessage());
-//        return new ResponseEntity<>(new ResponseDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST);
-//
-//    }
+    @ExceptionHandler(CustomValidationApiException.class)
+    public ResponseEntity<?> validationApiException(CustomValidationApiException e) {
+        log.error(e.getMessage());
+        return new ResponseEntity<>(Response.error("VALIDATION_ERROR", HttpStatus.BAD_REQUEST.value(), e.getErrorMap()),HttpStatus.BAD_REQUEST);
+    }
 //
 //    @ExceptionHandler(CustomForbiddenException.class)
 //    public ResponseEntity<?> forbiddenException(CustomForbiddenException e) {
