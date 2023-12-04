@@ -43,7 +43,7 @@ class UserControllerTest extends DummyObject {
     @Test
     void 회원가입_성공_테스트() throws Exception {
         JoinUserReqDto joinUserReqDto = new JoinUserReqDto();
-        joinUserReqDto.setEmail("gus5163");
+        joinUserReqDto.setEmail("gus9075@naver.com");
         joinUserReqDto.setUsername("aaa");
         joinUserReqDto.setPassword("1234");
         joinUserReqDto.setNickname("aaaa");

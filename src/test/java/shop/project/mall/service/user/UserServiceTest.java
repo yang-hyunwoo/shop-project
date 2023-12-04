@@ -1,6 +1,6 @@
 package shop.project.mall.service.user;
 
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,12 +13,15 @@ import shop.project.mall.domain.user.User;
 import shop.project.mall.dto.request.user.JoinUserReqDto;
 import shop.project.mall.dto.response.member.JoinUserResDto;
 import shop.project.mall.dummy.DummyObject;
+import shop.project.mall.exception.CustomApiException;
+import shop.project.mall.exception.error.ErrorCode;
 import shop.project.mall.repository.user.UserRepository;
-import shop.project.mall.service.user.UserService;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -33,6 +36,15 @@ public class UserServiceTest extends DummyObject {
 
     @Spy //진짜를 꺼내 InjectMocks에 넣어준다
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @BeforeEach
+    public void setUp() {
+        dateSetting();
+    }
+
+    private void dateSetting() {
+
+    }
 
     @Test
     void 회원가입_성공_테스트() {
@@ -52,6 +64,21 @@ public class UserServiceTest extends DummyObject {
         assertThat(join.getEmail()).isEqualTo("gus5162@naver.com");
     }
 
+    @Test
+    void 회원가입_실패_테스트() {
+
+        JoinUserReqDto joinUserReqDto = new JoinUserReqDto();
+        joinUserReqDto.setEmail("gus5162@naver.com");
+        joinUserReqDto.setPassword("1111");
+        joinUserReqDto.setNickname("test");
+
+        User hw = newMockUser(1L, "gus5162@naver.com", "현", UserRole.USER);
+        when(userRepository.findByEmail(joinUserReqDto.getEmail())).thenReturn(Optional.of(hw));
+
+        CustomApiException e = assertThrows(CustomApiException.class, () -> userService.join(joinUserReqDto));
+        assertEquals(ErrorCode.DUPLICATED_EMAIL.getMessage() , e.getMessage());
+
+    }
 
 
 }
