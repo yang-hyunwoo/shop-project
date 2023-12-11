@@ -1,5 +1,7 @@
 package shop.project.mall.service.user;
 
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,9 +10,11 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import shop.project.mall.auth.LoginUser;
 import shop.project.mall.domain.constant.UserRole;
 import shop.project.mall.domain.user.User;
 import shop.project.mall.dto.request.user.JoinUserReqDto;
+import shop.project.mall.dto.request.user.UserChangePwdReqDto;
 import shop.project.mall.dto.response.member.JoinUserResDto;
 import shop.project.mall.dummy.DummyObject;
 import shop.project.mall.exception.CustomApiException;
@@ -20,9 +24,9 @@ import shop.project.mall.repository.user.UserRepository;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -33,6 +37,9 @@ public class UserServiceTest extends DummyObject {
 
     @Mock //가짜 객체
     private UserRepository userRepository;
+
+    @Mock
+    private EntityManager em;
 
     @Spy //진짜를 꺼내 InjectMocks에 넣어준다
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -77,6 +84,33 @@ public class UserServiceTest extends DummyObject {
 
         CustomApiException e = assertThrows(CustomApiException.class, () -> userService.join(joinUserReqDto));
         assertEquals(ErrorCode.DUPLICATED_EMAIL.getMessage() , e.getMessage());
+
+    }
+
+    @Test
+    void 비밀번호_변경_시_성공() {
+
+        User hw = newMockUser(1L, "gus5162@naver.com", "현", UserRole.USER);
+        LoginUser loginUser = new LoginUser(hw);
+
+        UserChangePwdReqDto userChangePwdReqDto = new UserChangePwdReqDto();
+        userChangePwdReqDto.setPwd("dnfntm122##");
+        userChangePwdReqDto.setPwdConfirm("dnfntm122##");
+        userService.changePassword(userChangePwdReqDto, loginUser);
+
+    }
+
+
+    @Test
+    void 비밀번호_변경_시_일치하지_않을_경우() {
+        User hw = newMockUser(1L, "gus5162@naver.com", "현", UserRole.USER);
+        LoginUser loginUser = new LoginUser(hw);
+        UserChangePwdReqDto userChangePwdReqDto = new UserChangePwdReqDto();
+        userChangePwdReqDto.setPwd("dnfntm12233##");
+        userChangePwdReqDto.setPwdConfirm("dnfntm122##");
+
+        CustomApiException e = assertThrows(CustomApiException.class, () -> userService.changePassword(userChangePwdReqDto, loginUser));
+        assertEquals(ErrorCode.PASSWORD_DO_NOT_MATCH.getMessage() , e.getMessage());
 
     }
 

@@ -22,6 +22,10 @@ public class Response<T> {
         return new Response<>("SUCCESS", HttpStatus.OK.value(),data);
     }
 
+    public static <T> Response<T> successUpdate(T data){
+        return new Response<>("SUCCESS", HttpStatus.OK.value(),data);
+    }
+
     public static <T> Response<T> successNew(T data){
         return new Response<>("SUCCESS", HttpStatus.CREATED.value(),data);
     }

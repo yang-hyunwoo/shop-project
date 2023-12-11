@@ -159,4 +159,8 @@ public class User extends AuditingFields {
     public void usedChange() {
         this.useYn = !this.useYn;
     }
+
+    public void userChangePassword(String newPassword) {
+        this.password = newPassword;
+    }
 }

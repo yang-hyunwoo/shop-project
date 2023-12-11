@@ -20,6 +20,7 @@ public enum ErrorCode {
     DECODE_ERROR(HttpStatus.CONFLICT, "복호화 오류 입니다."),
     NO_AUTHORIZATION(HttpStatus.UNAUTHORIZED, "권한이 없습니다."),
     FIRST_LOGIN_ING(HttpStatus.CONFLICT, "로그인을 진행해 주세요."),
+    PASSWORD_DO_NOT_MATCH(HttpStatus.CONFLICT , "비밀번호가 일치하지 않습니다."),
     ;
 
     private HttpStatus status;
