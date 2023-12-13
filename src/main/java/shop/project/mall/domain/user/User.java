@@ -12,6 +12,7 @@ import shop.project.mall.domain.constant.Gender;
 import shop.project.mall.domain.constant.UserRole;
 import shop.project.mall.domain.point.PointHist;
 import shop.project.mall.domain.store.Store;
+import shop.project.mall.dto.request.user.UserDtlModifyReqDto;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -162,5 +163,11 @@ public class User extends AuditingFields {
 
     public void userChangePassword(String newPassword) {
         this.password = newPassword;
+    }
+
+    public void userDtlModify(UserDtlModifyReqDto userDtlModifyReqDto) {
+        this.attachFile = userDtlModifyReqDto.getAttachFile();
+        this.nickname = userDtlModifyReqDto.getNickName();
+        this.phoneNumber = userDtlModifyReqDto.getPhoneNumber();
     }
 }

@@ -80,6 +80,7 @@ public class UserServiceTest extends DummyObject {
         joinUserReqDto.setNickname("test");
 
         User hw = newMockUser(1L, "gus5162@naver.com", "현", UserRole.USER);
+
         when(userRepository.findByEmail(joinUserReqDto.getEmail())).thenReturn(Optional.of(hw));
 
         CustomApiException e = assertThrows(CustomApiException.class, () -> userService.join(joinUserReqDto));
@@ -88,16 +89,17 @@ public class UserServiceTest extends DummyObject {
     }
 
     @Test
-    void 비밀번호_변경_시_성공() {
+    void 비밀번호_변경_시_변경_된다() {
 
         User hw = newMockUser(1L, "gus5162@naver.com", "현", UserRole.USER);
+        when(userRepository.findById(hw.getId())).thenReturn(Optional.of(hw));
         LoginUser loginUser = new LoginUser(hw);
-
+        String password = hw.getPassword();
         UserChangePwdReqDto userChangePwdReqDto = new UserChangePwdReqDto();
         userChangePwdReqDto.setPwd("dnfntm122##");
         userChangePwdReqDto.setPwdConfirm("dnfntm122##");
         userService.changePassword(userChangePwdReqDto, loginUser);
-
+        assertNotEquals(password, hw.getPassword());
     }
 
 
@@ -113,6 +115,5 @@ public class UserServiceTest extends DummyObject {
         assertEquals(ErrorCode.PASSWORD_DO_NOT_MATCH.getMessage() , e.getMessage());
 
     }
-
 
 }

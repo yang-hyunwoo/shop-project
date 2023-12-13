@@ -9,6 +9,7 @@ import shop.project.mall.auth.LoginUser;
 import shop.project.mall.domain.user.User;
 import shop.project.mall.dto.request.user.JoinUserReqDto;
 import shop.project.mall.dto.request.user.UserChangePwdReqDto;
+import shop.project.mall.dto.request.user.UserDtlModifyReqDto;
 import shop.project.mall.dto.response.member.JoinUserResDto;
 import shop.project.mall.exception.CustomApiException;
 import shop.project.mall.exception.error.ErrorCode;
@@ -72,5 +73,19 @@ public class UserService {
         }
         User user = userRepository.findById(loginUser.getUser().getId()).orElseThrow(() -> new CustomApiException(ErrorCode.USER_INVALIED.getMessage()));
         user.userChangePassword(passwordEncoder.encode(userChangePwdReqDto.getPwd()));
+    }
+
+    /**
+     * 사용자의 정보를 변경 한다
+     * 이미지
+     * 닉네임
+     * 이름
+     * 폰번호
+     * @param userDtlModifyReqDto
+     * @param loginUser
+     */
+    public void userDtlModify(UserDtlModifyReqDto userDtlModifyReqDto, LoginUser loginUser) {
+        User user = userRepository.findById(loginUser.getUser().getId()).orElseThrow(() -> new CustomApiException(ErrorCode.USER_INVALIED.getMessage()));
+        user.userDtlModify(userDtlModifyReqDto);
     }
 }
